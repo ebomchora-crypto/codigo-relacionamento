@@ -120,7 +120,11 @@ MUS *= (1 - 0.65 * envv)
 fade = np.ones(N, np.float32); fade[: int(0.8 * SR)] = np.linspace(0, 1, int(0.8 * SR)); fade[int((TOTAL - 1.2) * SR): int(TOTAL * SR)] = np.linspace(1, 0, int(1.2 * SR)); fade[int(TOTAL * SR):] = 0
 MUS *= fade
 
-mix = VO * 1.0 + SFX * 0.55 + MUS * 0.55
+SFX_G, MUS_G = 0.17, 0.12
+def db(x): return 20 * np.log10(np.sqrt(np.mean(x ** 2)) + 1e-9)
+speech = np.abs(VO) > 0.02
+print("RMS fala:", round(float(db(VO[speech])), 1), "dB | música (durante a fala):", round(float(db(MUS[speech] * MUS_G)), 1), "dB | pico SFX:", round(float(20 * np.log10(np.abs(SFX * SFX_G).max())), 1), "dB | pico voz:", round(float(20 * np.log10(np.abs(VO).max())), 1), "dB")
+mix = VO * 1.0 + SFX * SFX_G + MUS * MUS_G
 mix = mix[: int(TOTAL * SR)]
 peak = np.abs(mix).max(); mix = mix / peak * 0.89
 pcm = (np.clip(mix, -1, 1) * 32767).astype(np.int16)
