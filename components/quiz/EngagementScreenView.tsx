@@ -5,6 +5,7 @@ import type { EngagementScreen } from "@/types/quiz";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import AmbientBackground from "@/components/ui/AmbientBackground";
+import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
 import PulseOrb from "@/components/ui/PulseOrb";
 import WordReveal from "@/components/ui/WordReveal";
 
@@ -20,18 +21,19 @@ export default function EngagementScreenView({
 
   return (
     <div className="texture-grain relative min-h-dvh overflow-hidden bg-ink">
+      {screen.image && <PhotoBackdrop photo={screen.image} fade="both" opacity={0.6} />}
       <AmbientBackground position="center" />
       <Container className="pb-consent relative flex min-h-dvh flex-col pt-[max(1.25rem,env(safe-area-inset-top))] text-center">
         <div className="flex flex-1 flex-col items-center justify-center gap-7 py-8">
           <PulseOrb />
-          <h2 className="text-balance font-display text-[1.65rem] font-semibold leading-snug text-paper sm:text-3xl">
+          <h2 className="text-balance font-display text-[1.65rem] font-semibold leading-snug text-paper [text-shadow:0_2px_18px_rgba(0,0,0,0.85)] sm:text-3xl">
             <WordReveal text={screen.title} delay={0.3} />
           </h2>
           <motion.p
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: bodyDelay }}
-            className="max-w-md text-balance text-base leading-relaxed text-mist"
+            className="max-w-md text-balance text-base leading-relaxed text-paper/80 [text-shadow:0_1px_14px_rgba(0,0,0,0.9)]"
           >
             {screen.body}
           </motion.p>

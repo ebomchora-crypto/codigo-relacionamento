@@ -3,6 +3,7 @@ import type { ResultProfile } from "@/types/quiz";
 export const RESULT_PROFILES: Record<string, ResultProfile> = {
   anxiety: {
     id: "anxiety",
+    image: { src: "/images/waiting-bed.jpg", position: "40% 40%" },
     label: "Perfil A",
     title: "O silêncio pode estar ocupando espaço demais nos seus pensamentos.",
     body:
@@ -15,6 +16,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
   },
   limits: {
     id: "limits",
+    image: { src: "/images/couple-talking.jpg", position: "50% 35%", tint: true },
     label: "Perfil B",
     title: "Você pode estar colocando a conexão acima das próprias necessidades.",
     body:
@@ -27,6 +29,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
   },
   communication: {
     id: "communication",
+    image: { src: "/images/hands-typing.jpg", position: "65% 50%", tint: true },
     label: "Perfil C",
     title: "Talvez você saiba o que sente, mas tenha dificuldade de expressar isso.",
     body:
@@ -39,6 +42,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
   },
   balanced: {
     id: "balanced",
+    image: { src: "/images/phone-candle.jpg", position: "78% 50%" },
     label: "Perfil D",
     title: "Você já demonstra atitudes importantes para uma comunicação saudável.",
     body:

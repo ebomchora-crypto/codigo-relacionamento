@@ -6,6 +6,7 @@ import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
 import SectionLabel from "@/components/ui/SectionLabel";
 import AmbientBackground from "@/components/ui/AmbientBackground";
+import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
 import SignalArt from "@/components/ui/SignalArt";
 import WordReveal from "@/components/ui/WordReveal";
 import { haptic } from "@/lib/haptics";
@@ -21,6 +22,12 @@ const HEADLINE = "A pessoa esfriou... ou alguma coisa mudou entre vocês?";
 export default function IntroScreen({ onStart }: { onStart: () => void }) {
   return (
     <div className="texture-grain relative min-h-dvh overflow-hidden bg-ink">
+      <PhotoBackdrop
+        photo={{ src: "/images/phone-candle.jpg", position: "78% 50%" }}
+        className="inset-x-0 bottom-auto h-[46%]"
+        opacity={0.42}
+        priority
+      />
       <AmbientBackground />
       <Container className="pb-consent relative flex min-h-dvh flex-col pt-[max(1.5rem,env(safe-area-inset-top))]">
         <div className="flex flex-1 flex-col justify-center gap-5 py-5">

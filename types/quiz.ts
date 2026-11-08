@@ -21,7 +21,14 @@ export interface QuizQuestion {
   options: QuizOption[];
 }
 
+export interface PhotoRef {
+  src: string;
+  position?: string;
+  tint?: boolean;
+}
+
 export interface EngagementScreen {
+  image?: PhotoRef;
   afterQuestionId: number;
   title: string;
   body: string;
@@ -34,6 +41,7 @@ export interface AnsweredQuestion {
 }
 
 export interface ResultProfile {
+  image?: PhotoRef;
   id: Dimension;
   label: string;
   title: string;

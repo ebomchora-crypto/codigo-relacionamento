@@ -7,6 +7,7 @@ import Button from "@/components/ui/Button";
 import EbookCoverArt from "@/components/offer/EbookCoverArt";
 import { PRODUCT_NAME, PRICE, PRICE_COMPARE, formatPrice } from "@/data/product";
 import Reveal from "@/components/ui/Reveal";
+import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
 import { startCheckout } from "@/lib/checkout/start";
 import { haptic } from "@/lib/haptics";
 
@@ -31,16 +32,22 @@ export default function PricingOffer() {
         style={{ background: "radial-gradient(closest-side, rgba(198,161,91,0.16), transparent)" }}
       />
       <Container>
-        <Reveal y={28} className="relative rounded-3xl border border-gold/25 bg-ink-soft p-6 shadow-gold sm:p-10">
-          <SectionLabel>Acesso digital</SectionLabel>
-          <h2 className="mt-3 font-display text-2xl font-semibold text-paper sm:text-3xl">
+        <Reveal y={28} className="relative overflow-hidden rounded-3xl border border-gold/25 bg-ink-soft p-6 shadow-gold sm:p-10">
+          <PhotoBackdrop
+            photo={{ src: "/images/reading-window.jpg", position: "75% 40%" }}
+            className="inset-x-0 bottom-auto h-48"
+            opacity={0.55}
+            sizes="(min-width: 640px) 672px, 100vw"
+          />
+          <SectionLabel className="relative">Acesso digital</SectionLabel>
+          <h2 className="relative mt-3 font-display text-2xl font-semibold text-paper sm:text-3xl">
             {PRODUCT_NAME}
           </h2>
-          <p className="mt-1 text-sm text-mist sm:text-base">
+          <p className="relative mt-1 text-sm text-mist sm:text-base">
             Seu próximo passo para se comunicar com mais segurança.
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-8 sm:flex-row sm:items-start">
+          <div className="relative mt-8 flex flex-col items-center gap-8 sm:flex-row sm:items-start">
             <EbookCoverArt className="w-40 shrink-0 sm:w-44" />
 
             <div className="flex w-full flex-col gap-6">

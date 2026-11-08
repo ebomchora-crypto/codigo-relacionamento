@@ -5,6 +5,7 @@ import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
 import AmbientBackground from "@/components/ui/AmbientBackground";
+import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
 import WordReveal from "@/components/ui/WordReveal";
 import Reveal from "@/components/ui/Reveal";
 import type { ResultProfile } from "@/types/quiz";
@@ -21,6 +22,13 @@ export default function ResultHero({
 
   return (
     <section className="texture-grain relative overflow-hidden bg-ink py-14 sm:py-20">
+      {profile.image && (
+        <PhotoBackdrop
+          photo={profile.image}
+          className="inset-x-0 bottom-auto h-[26rem]"
+          opacity={0.34}
+        />
+      )}
       <AmbientBackground />
       <Container className="relative">
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>

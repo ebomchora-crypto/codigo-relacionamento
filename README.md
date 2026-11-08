@@ -317,6 +317,17 @@ public/                    Assets estáticos
 
 ---
 
+## Imagens
+
+As fotos em `public/images/` vêm do [Pexels](https://www.pexels.com/license/)
+(licença gratuita, uso comercial permitido, atribuição não obrigatória) e são
+usadas apenas como fundo decorativo (`components/ui/PhotoBackdrop.tsx`). Para
+trocar, substitua o arquivo (use um nome novo para evitar cache do otimizador
+de imagens) e ajuste `data/engagement-screens.ts`, `data/results.ts` ou os
+componentes da oferta.
+
+---
+
 ## Limitações conhecidas e avisos de transparência
 
 - A capa do e-book exibida é um mockup placeholder (ver seção 4).
