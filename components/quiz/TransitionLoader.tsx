@@ -28,7 +28,12 @@ export default function TransitionLoader({ onDone }: { onDone: () => void }) {
   const progress = Math.min(100, ((step + 1) / MESSAGES.length) * 100);
 
   return (
-    <Container className="flex min-h-screen flex-col items-center justify-center py-12 text-center">
+    <div className="texture-grain relative min-h-screen overflow-hidden bg-ink">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.08] blur-[110px]"
+      />
+      <Container className="relative flex min-h-screen flex-col items-center justify-center py-12 text-center">
       <div className="flex flex-col items-center gap-8">
         <div className="relative h-14 w-14">
           <span className="absolute inset-0 animate-spin rounded-full border-2 border-white/10 border-t-gold" />
@@ -57,6 +62,7 @@ export default function TransitionLoader({ onDone }: { onDone: () => void }) {
           />
         </div>
       </div>
-    </Container>
+      </Container>
+    </div>
   );
 }

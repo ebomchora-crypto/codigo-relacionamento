@@ -120,7 +120,7 @@ export default function QuizEngine({ onComplete }: { onComplete: (result: QuizRe
   }
 
   return (
-    <div className="texture-grain min-h-screen bg-ink">
+    <div className="min-h-screen bg-ink">
       <AnimatePresence mode="wait">
         {phase.type === "question" && (
           <motion.div

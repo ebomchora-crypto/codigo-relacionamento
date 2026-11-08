@@ -1,41 +1,56 @@
+import Image from "next/image";
+import { MessageCircle } from "lucide-react";
 import Container from "@/components/ui/Container";
 import SectionLabel from "@/components/ui/SectionLabel";
-import { PRODUCT_MODULES } from "@/data/modules";
+import { TESTIMONIALS } from "@/data/testimonials";
 
 /**
- * Enquanto não existirem depoimentos reais e verificados, esta seção exibe
- * uma prévia honesta do conteúdo do guia em vez de avaliações fictícias —
- * conforme exigido na especificação do produto. Quando depoimentos reais
- * existirem, substitua este componente por um carrossel de cards com nome,
- * identificação autorizada e, opcionalmente, nota/foto — nunca inventados.
+ * Prova social com prints reais de conversas enviadas por leitores — sem
+ * nomes, fotos ou dados pessoais inventados ou expostos, e sem nenhuma nota,
+ * contador ou percentual fabricado. Se um dia não houver nenhum print real
+ * disponível, troque TESTIMONIALS por um array vazio e restaure o fallback
+ * de prévia de conteúdo (ver histórico deste arquivo) em vez de inventar
+ * depoimentos.
  */
 export default function SocialProof() {
+  if (TESTIMONIALS.length === 0) return null;
+
   return (
     <section className="bg-ink-soft py-16 sm:py-20">
-      <Container>
-        <SectionLabel>Prévia do conteúdo</SectionLabel>
+      <Container className="max-w-2xl">
+        <SectionLabel>Prova social</SectionLabel>
         <h2 className="mt-4 font-display text-2xl font-semibold leading-tight text-paper sm:text-3xl">
-          Um primeiro olhar sobre o que você vai estudar
+          Experiências de quem já conheceu o guia
         </h2>
         <p className="mt-4 text-base leading-relaxed text-mist">
-          Ainda não publicamos depoimentos de leitores — preferimos esperar por avaliações reais e
-          verificadas a inventar números. Por enquanto, veja um resumo direto de cada módulo do
-          guia.
+          Prints reais de conversas enviadas por leitores, publicados com a identidade preservada.
         </p>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          {PRODUCT_MODULES.map((module) => (
-            <div
-              key={module.number}
-              className="rounded-2xl border border-white/10 bg-ink p-5 shadow-card"
-            >
-              <span className="font-display text-xs text-gold">Módulo {module.number}</span>
-              <h3 className="mt-2 font-display text-base font-semibold text-paper">{module.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-mist">{module.description}</p>
-            </div>
-          ))}
-        </div>
       </Container>
+
+      <div className="mt-10 flex snap-x snap-mandatory gap-5 overflow-x-auto px-5 pb-4 sm:px-6 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        <div className="shrink-0 basis-[calc((100%-2.5rem)/2)] sm:basis-0" aria-hidden />
+        {TESTIMONIALS.map((testimonial) => (
+          <figure
+            key={testimonial.src}
+            className="relative shrink-0 snap-center overflow-hidden rounded-2xl border border-white/10 bg-ink shadow-card"
+          >
+            <div className="flex items-center gap-2 border-b border-white/10 bg-ink-soft px-3 py-2">
+              <MessageCircle size={13} className="text-gold" />
+              <span className="text-[11px] font-medium uppercase tracking-wide text-mist">
+                Conversa real
+              </span>
+            </div>
+            <Image
+              src={testimonial.src}
+              alt={testimonial.alt}
+              width={testimonial.width}
+              height={testimonial.height}
+              className="h-auto w-[220px] sm:w-[240px]"
+            />
+          </figure>
+        ))}
+        <div className="shrink-0 basis-[calc((100%-2.5rem)/2)] sm:basis-0" aria-hidden />
+      </div>
     </section>
   );
 }
