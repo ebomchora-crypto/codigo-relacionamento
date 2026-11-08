@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<title>O Código do Silêncio — motion</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #000; overflow: hidden; }
+  #stage { position: relative; width: 100vw; height: 100vh; overflow: hidden; font-family: "Inter", "Helvetica Neue", Arial, sans-serif; }
+  canvas { display: block; }
+  #ui { position: absolute; inset: 0; pointer-events: none; --u: calc(100vh / 1280); }
+
+  .pill { position: absolute; left: 0; top: 0; display: none; white-space: nowrap; background: #fff; color: #17171c;
+    font-weight: 800; letter-spacing: .02em; text-transform: uppercase; font-size: calc(var(--u) * 24);
+    padding: calc(var(--u) * 8) calc(var(--u) * 18) calc(var(--u) * 8) calc(var(--u) * 14); border-radius: 999px;
+    box-shadow: 0 calc(var(--u) * 6) calc(var(--u) * 18) rgba(0,0,0,.35); display: none; align-items: center; gap: calc(var(--u) * 10); }
+  .pill i { width: calc(var(--u) * 14); height: calc(var(--u) * 14); border-radius: 50%; display: inline-block; }
+
+  .title { position: absolute; left: 0; top: 0; display: none; white-space: nowrap; color: #ffd23f; font-weight: 900;
+    font-size: calc(var(--u) * 54); text-transform: uppercase; letter-spacing: .01em;
+    -webkit-text-stroke: calc(var(--u) * 9) #2a1a0a; paint-order: stroke fill; filter: drop-shadow(0 calc(var(--u) * 6) calc(var(--u) * 8) rgba(0,0,0,.35)); }
+
+  #cap { position: absolute; left: 0; right: 0; top: 63%; text-align: center; display: none; }
+  #cap span { display: inline-block; color: #fff; font-weight: 900; font-size: calc(var(--u) * 92); letter-spacing: .005em;
+    -webkit-text-stroke: calc(var(--u) * 16) #1b1230; paint-order: stroke fill; text-shadow: 0 calc(var(--u) * 8) calc(var(--u) * 14) rgba(0,0,0,.35); }
+  #cap span.hi { color: #ffd23f; }
+
+  #cta { white-space: nowrap; position: absolute; left: 50%; top: 75.5%; transform: translateX(-50%); display: none; text-align: center; }
+  #cta .btn { display: inline-block; background: linear-gradient(135deg, #c6a15b, #e4c990 50%, #c6a15b); color: #1b1230; font-weight: 900;
+    text-transform: uppercase; font-size: calc(var(--u) * 40); padding: calc(var(--u) * 22) calc(var(--u) * 48); border-radius: 999px;
+    box-shadow: 0 calc(var(--u) * 12) calc(var(--u) * 40) rgba(198,161,91,.55), 0 0 0 calc(var(--u) * 6) rgba(255,255,255,.9); }
+  #cta .sub { margin-top: calc(var(--u) * 16); color: #fff; font-weight: 800; font-size: calc(var(--u) * 30);
+    -webkit-text-stroke: calc(var(--u) * 8) #1b1230; paint-order: stroke fill; }
+</style>
+</head>
+<body>
+<div id="stage"><div id="ui"></div></div>
+<script type="module" src="./scene.js"></script>
+</body>
+</html>
