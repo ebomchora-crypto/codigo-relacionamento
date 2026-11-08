@@ -10,10 +10,10 @@ N = int(TOTAL * SR) + SR
 rng = np.random.default_rng(3)
 
 # ---------- narração ----------
-with wave.open("voice/vo_full.wav") as w:
-    vo22 = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
-x22 = np.arange(len(vo22)) / 22050
-vo = np.interp(np.arange(int(len(vo22) / 22050 * SR)) / SR, x22, vo22).astype(np.float32)
+with wave.open("voice2/vo_full.wav") as w:
+    vsr = w.getframerate()
+    vo_in = np.frombuffer(w.readframes(w.getnframes()), dtype=np.int16).astype(np.float32) / 32768
+vo = vo_in if vsr == SR else np.interp(np.arange(int(len(vo_in) / vsr * SR)) / SR, np.arange(len(vo_in)) / vsr, vo_in).astype(np.float32)
 vo = vo / (np.abs(vo).max() + 1e-9) * 0.9
 VO = np.zeros(N, np.float32); VO[: len(vo)] = vo[: N]
 

@@ -6,3 +6,6 @@ voice/*.onnx.json
 voice/*.wav
 render_*.log
 audio_mix.wav
+voice2/*.f32
+voice2/*.wav
+voice2/*.mp3
