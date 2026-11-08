@@ -118,20 +118,14 @@ webhook — apenas não é replicado para a CAPI.
 
 ---
 
-## 4. Como adicionar a capa real do e-book
+## 4. Capa do e-book
 
-A capa atual (`components/offer/EbookCoverArt.tsx`) é um mockup gerado em
-SVG — **não é a arte final do produto** — para que a oferta já fique
-completa visualmente sem depender de um arquivo externo.
-
-Para usar a capa real:
-
-1. Coloque o arquivo em `public/ebook-cover.jpg` (ou `.png`/`.webp`).
-2. Substitua o conteúdo de `components/offer/EbookCoverArt.tsx` por uma
-   `<Image src="/ebook-cover.jpg" alt="Capa do e-book O Código do Silêncio" ... />`
-   do `next/image`, mantendo a mesma assinatura do componente (`className`)
-   para que `ProductShowcase.tsx` e `PricingOffer.tsx` continuem funcionando
-   sem alterações.
+A capa real está em `public/images/ebook-cover-hd.jpg` e é exibida por
+`components/offer/EbookCoverArt.tsx`. O arquivo original recebido tinha só
+175x175 px; ele foi ampliado com super-resolução (Real-ESRGAN 4x) para 1000x1000.
+Se você tiver a arte original em alta resolução, substitua o arquivo mantendo
+o nome (ou use um nome novo e ajuste o `src` do componente, para evitar cache
+do otimizador de imagens).
 
 ---
 
