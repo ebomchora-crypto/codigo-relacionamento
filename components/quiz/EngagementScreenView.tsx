@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import type { EngagementScreen } from "@/types/quiz";
 import Container from "@/components/ui/Container";
 import Button from "@/components/ui/Button";
+import AmbientBackground from "@/components/ui/AmbientBackground";
+import PulseOrb from "@/components/ui/PulseOrb";
+import WordReveal from "@/components/ui/WordReveal";
 
 export default function EngagementScreenView({
   screen,
@@ -12,25 +15,34 @@ export default function EngagementScreenView({
   screen: EngagementScreen;
   onContinue: () => void;
 }) {
+  const titleWords = screen.title.split(" ").length;
+  const bodyDelay = 0.35 + titleWords * 0.045;
+
   return (
-    <div className="texture-grain relative min-h-screen overflow-hidden bg-ink">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-1/3 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.08] blur-[110px]"
-      />
-      <Container className="relative flex min-h-screen flex-col items-center justify-center py-12 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          className="flex flex-col items-center gap-6"
-        >
-          <span className="h-px w-10 bg-gold-fade" />
-          <h2 className="font-display text-2xl font-semibold leading-snug text-paper sm:text-3xl">
-            {screen.title}
+    <div className="texture-grain relative min-h-dvh overflow-hidden bg-ink">
+      <AmbientBackground position="center" />
+      <Container className="pb-consent relative flex min-h-dvh flex-col pt-[max(1.25rem,env(safe-area-inset-top))] text-center">
+        <div className="flex flex-1 flex-col items-center justify-center gap-7 py-8">
+          <PulseOrb />
+          <h2 className="text-balance font-display text-[1.65rem] font-semibold leading-snug text-paper sm:text-3xl">
+            <WordReveal text={screen.title} delay={0.3} />
           </h2>
-          <p className="max-w-md text-balance text-base leading-relaxed text-mist">{screen.body}</p>
-          <Button onClick={onContinue} className="mt-4">
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: bodyDelay }}
+            className="max-w-md text-balance text-base leading-relaxed text-mist"
+          >
+            {screen.body}
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: bodyDelay + 0.35 }}
+        >
+          <Button onClick={onContinue} className="w-full sm:w-auto">
             {screen.cta}
           </Button>
         </motion.div>

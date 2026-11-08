@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  future: { hoverOnlyWhenSupported: true },
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
@@ -36,10 +37,30 @@ const config: Config = {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        drift: {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1)" },
+          "50%": { transform: "translate3d(6%,5%,0) scale(1.1)" },
+        },
+        "drift-reverse": {
+          "0%, 100%": { transform: "translate3d(0,0,0) scale(1.05)" },
+          "50%": { transform: "translate3d(-7%,-4%,0) scale(0.95)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        "cover-shine": {
+          "0%, 60%": { transform: "translateX(-130%) skewX(-18deg)" },
+          "100%": { transform: "translateX(230%) skewX(-18deg)" },
+        },
       },
       animation: {
         "fade-up": "fade-up 0.6s ease-out both",
         shimmer: "shimmer 2.4s linear infinite",
+        drift: "drift 18s ease-in-out infinite",
+        "drift-reverse": "drift-reverse 24s ease-in-out infinite",
+        float: "float 7s ease-in-out infinite",
+        "cover-shine": "cover-shine 6s ease-in-out infinite",
       },
     },
   },

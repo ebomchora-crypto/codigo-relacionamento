@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Reveal from "@/components/ui/Reveal";
 import Container from "@/components/ui/Container";
 import { FAQ_ITEMS } from "@/data/faq";
 import { cn } from "@/lib/utils";
@@ -13,20 +14,22 @@ export default function FaqAccordion() {
   return (
     <section className="bg-ink-soft py-16 sm:py-20">
       <Container>
-        <h2 className="font-display text-2xl font-semibold leading-tight text-paper sm:text-3xl">
-          Perguntas frequentes
-        </h2>
+        <Reveal>
+          <h2 className="font-display text-2xl font-semibold leading-tight text-paper sm:text-3xl">
+            Perguntas frequentes
+          </h2>
+        </Reveal>
 
         <div className="mt-8 flex flex-col divide-y divide-white/10 border-y border-white/10">
           {FAQ_ITEMS.map((item, index) => {
             const open = openIndex === index;
             return (
-              <div key={item.question}>
+              <Reveal key={item.question} delay={index * 0.05} y={12}>
                 <button
                   type="button"
                   onClick={() => setOpenIndex(open ? null : index)}
                   aria-expanded={open}
-                  className="focus-ring flex w-full items-center gap-4 py-5 text-left"
+                  className="focus-ring flex min-h-14 w-full items-center gap-4 py-4 text-left"
                 >
                   <span className="flex-1 text-sm font-medium text-paper sm:text-base">
                     {item.question}
@@ -51,7 +54,7 @@ export default function FaqAccordion() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </Reveal>
             );
           })}
         </div>

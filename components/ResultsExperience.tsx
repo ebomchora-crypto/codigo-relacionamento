@@ -1,27 +1,31 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import ResultHero from "@/components/results/ResultHero";
 import ProductShowcase from "@/components/offer/ProductShowcase";
 import ModulesList from "@/components/offer/ModulesList";
 import SocialProof from "@/components/offer/SocialProof";
 import PricingOffer from "@/components/offer/PricingOffer";
 import FaqAccordion from "@/components/offer/FaqAccordion";
+import StickyCta from "@/components/offer/StickyCta";
 import SiteFooter from "@/components/SiteFooter";
 import { RESULT_PROFILES } from "@/data/results";
 import { trackViewContent } from "@/lib/analytics/events";
 import type { Dimension } from "@/types/quiz";
 
 export default function ResultsExperience({ profile }: { profile: Dimension }) {
+  const heroRef = useRef<HTMLDivElement>(null);
   const offerRef = useRef<HTMLDivElement>(null);
+  const pricingRef = useRef<HTMLDivElement>(null);
   const viewTracked = useRef(false);
+  const [pastHero, setPastHero] = useState(false);
+  const [pricingVisible, setPricingVisible] = useState(false);
 
   const resultProfile = RESULT_PROFILES[profile] ?? RESULT_PROFILES.balanced;
 
   useEffect(() => {
-    const target = offerRef.current;
-    if (!target) return;
-
+    const offer = offerRef.current;
+    if (!offer) return;
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
@@ -33,9 +37,27 @@ export default function ResultsExperience({ profile }: { profile: Dimension }) {
       },
       { threshold: 0.3 },
     );
-
-    observer.observe(target);
+    observer.observe(offer);
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const hero = heroRef.current;
+    const pricing = pricingRef.current;
+    if (!hero || !pricing) return;
+
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      setPastHero(!entry.isIntersecting && entry.boundingClientRect.top < 0);
+    });
+    const pricingObserver = new IntersectionObserver(([entry]) => {
+      setPricingVisible(entry.isIntersecting);
+    });
+    heroObserver.observe(hero);
+    pricingObserver.observe(pricing);
+    return () => {
+      heroObserver.disconnect();
+      pricingObserver.disconnect();
+    };
   }, []);
 
   function scrollToOffer() {
@@ -44,15 +66,20 @@ export default function ResultsExperience({ profile }: { profile: Dimension }) {
 
   return (
     <div>
-      <ResultHero profile={resultProfile} onViewOffer={scrollToOffer} />
+      <div ref={heroRef}>
+        <ResultHero profile={resultProfile} onViewOffer={scrollToOffer} />
+      </div>
       <div ref={offerRef}>
         <ProductShowcase />
       </div>
       <ModulesList />
       <SocialProof />
-      <PricingOffer />
+      <div ref={pricingRef}>
+        <PricingOffer />
+      </div>
       <FaqAccordion />
       <SiteFooter />
+      <StickyCta visible={pastHero && !pricingVisible} />
     </div>
   );
 }

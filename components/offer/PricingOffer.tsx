@@ -6,9 +6,9 @@ import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
 import EbookCoverArt from "@/components/offer/EbookCoverArt";
 import { PRODUCT_NAME, PRICE, PRICE_COMPARE, formatPrice } from "@/data/product";
-import { buildCheckoutUrl } from "@/lib/checkout/kiwify";
-import { captureUtmParams } from "@/lib/session";
-import { trackInitiateCheckout } from "@/lib/analytics/events";
+import Reveal from "@/components/ui/Reveal";
+import { startCheckout } from "@/lib/checkout/start";
+import { haptic } from "@/lib/haptics";
 
 const FEATURES = [
   "E-book digital completo.",
@@ -19,20 +19,19 @@ const FEATURES = [
 
 export default function PricingOffer() {
   function handleCheckoutClick() {
-    trackInitiateCheckout();
-    const utm = captureUtmParams();
-    const url = buildCheckoutUrl(utm);
-    window.location.href = url;
+    haptic(15);
+    startCheckout();
   }
 
   return (
     <section id="oferta" className="texture-grain relative overflow-hidden bg-ink py-16 sm:py-20">
       <div
         aria-hidden
-        className="pointer-events-none absolute -bottom-32 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-gold/10 blur-[110px]"
+        className="pointer-events-none absolute -bottom-40 left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 animate-drift rounded-full"
+        style={{ background: "radial-gradient(closest-side, rgba(198,161,91,0.16), transparent)" }}
       />
       <Container>
-        <div className="rounded-3xl border border-gold/25 bg-ink-soft p-6 shadow-gold sm:p-10">
+        <Reveal y={28} className="relative rounded-3xl border border-gold/25 bg-ink-soft p-6 shadow-gold sm:p-10">
           <SectionLabel>Acesso digital</SectionLabel>
           <h2 className="mt-3 font-display text-2xl font-semibold text-paper sm:text-3xl">
             {PRODUCT_NAME}
@@ -63,7 +62,7 @@ export default function PricingOffer() {
                 </span>
               </div>
 
-              <Button onClick={handleCheckoutClick} className="w-full">
+              <Button onClick={handleCheckoutClick} className="min-h-14 w-full">
                 Quero acessar o guia
               </Button>
 
@@ -80,7 +79,7 @@ export default function PricingOffer() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

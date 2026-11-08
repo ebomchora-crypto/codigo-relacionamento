@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import IntroScreen from "@/components/IntroScreen";
 import QuizEngine, { type QuizResultPayload } from "@/components/quiz/QuizEngine";
 import ResultsExperience from "@/components/ResultsExperience";
@@ -18,13 +19,21 @@ export default function FunnelExperience() {
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }
 
-  if (stage === "intro") {
-    return <IntroScreen onStart={() => setStage("quiz")} />;
-  }
-
-  if (stage === "quiz") {
-    return <QuizEngine onComplete={handleComplete} />;
-  }
-
-  return <ResultsExperience profile={profile} />;
+  return (
+    <MotionConfig reducedMotion="user">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={stage}
+          initial={{ opacity: 0, scale: stage === "result" ? 1 : 0.985 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.01 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {stage === "intro" && <IntroScreen onStart={() => setStage("quiz")} />}
+          {stage === "quiz" && <QuizEngine onComplete={handleComplete} />}
+          {stage === "result" && <ResultsExperience profile={profile} />}
+        </motion.div>
+      </AnimatePresence>
+    </MotionConfig>
+  );
 }

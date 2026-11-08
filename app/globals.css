@@ -5,10 +5,23 @@
 :root {
   --font-display: "Playfair Display", serif;
   --font-body: "Inter", sans-serif;
+  /* Altura da barra de consentimento (ConsentBar ajusta em runtime). */
+  --consent-h: 7rem;
 }
 
 html {
   color-scheme: dark;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+  scroll-behavior: smooth;
+}
+
+button {
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 body {
@@ -60,4 +73,34 @@ body {
 
 .safe-top {
   padding-top: env(safe-area-inset-top, 0px);
+}
+
+.pb-consent {
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px) + var(--consent-h, 0px));
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.4) 50%, transparent 70%);
+  transform: translateX(-120%);
+  animation: btn-shine 4s ease-in-out 1.4s infinite;
+}
+
+@keyframes btn-shine {
+  0%,
+  55% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
 }

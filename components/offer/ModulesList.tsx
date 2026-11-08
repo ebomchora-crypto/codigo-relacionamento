@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import Reveal from "@/components/ui/Reveal";
 import Container from "@/components/ui/Container";
 import { PRODUCT_MODULES } from "@/data/modules";
 import { cn } from "@/lib/utils";
@@ -13,20 +14,22 @@ export default function ModulesList() {
   return (
     <section className="bg-ink py-16 sm:py-20">
       <Container>
-        <h2 className="font-display text-2xl font-semibold leading-tight text-paper sm:text-3xl">
-          O que você vai encontrar no guia?
-        </h2>
+        <Reveal>
+          <h2 className="font-display text-2xl font-semibold leading-tight text-paper sm:text-3xl">
+            O que você vai encontrar no guia?
+          </h2>
+        </Reveal>
 
         <div className="mt-8 flex flex-col divide-y divide-white/10 border-y border-white/10">
           {PRODUCT_MODULES.map((module, index) => {
             const open = openIndex === index;
             return (
-              <div key={module.number}>
+              <Reveal key={module.number} delay={index * 0.06} y={14}>
                 <button
                   type="button"
                   onClick={() => setOpenIndex(open ? null : index)}
                   aria-expanded={open}
-                  className="focus-ring flex w-full items-center gap-4 py-5 text-left"
+                  className="focus-ring flex min-h-14 w-full items-center gap-4 py-4 text-left"
                 >
                   <span className="font-display text-sm text-gold">{module.number}</span>
                   <span className="flex-1 font-display text-base font-medium text-paper sm:text-lg">
@@ -52,7 +55,7 @@ export default function ModulesList() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </Reveal>
             );
           })}
         </div>

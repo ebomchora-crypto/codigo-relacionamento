@@ -3,7 +3,7 @@ import { PRODUCT_NAME } from "@/data/product";
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-ink py-10">
+    <footer className="bg-ink pb-32 pt-10 sm:pb-10">
       <Container className="flex flex-col items-center gap-3 text-center">
         <p className="font-display text-sm text-gold-soft">{PRODUCT_NAME}</p>
         <p className="max-w-sm text-xs leading-relaxed text-mist/70">

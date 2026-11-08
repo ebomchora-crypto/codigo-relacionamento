@@ -13,7 +13,7 @@ export default function EbookCoverArt({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative mx-auto aspect-[3/4] w-full max-w-[280px] overflow-hidden rounded-xl border border-gold/25 shadow-gold",
+        "relative mx-auto aspect-[3/4] w-full max-w-[280px] animate-float overflow-hidden rounded-xl border border-gold/25 shadow-gold",
         className,
       )}
       role="img"
@@ -82,6 +82,10 @@ export default function EbookCoverArt({ className }: { className?: string }) {
           SEM PARECER CARENTE
         </text>
       </svg>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 animate-cover-shine bg-gradient-to-r from-transparent via-white/15 to-transparent"
+      />
     </div>
   );
 }
