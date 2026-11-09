@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { QUESTIONS, TOTAL_QUESTIONS } from "@/data/questions";
 import QuestionCard from "@/components/quiz/QuestionCard";
 import TransitionLoader from "@/components/quiz/TransitionLoader";
+import ThinkingLoader from "@/components/quiz/ThinkingLoader";
 import { classifyAnswers } from "@/lib/scoring/engine";
 import { loadQuizState, saveQuizState, clearQuizState, captureUtmParams } from "@/lib/session";
 import {
@@ -16,7 +17,17 @@ import type { AnsweredQuestion, Dimension, QuizOption, ScoreBreakdown } from "@/
 
 type Phase =
   | { type: "question"; questionIndex: number }
+  | { type: "thinking"; nextIndex: number }
   | { type: "transition" };
+
+/** Pausa de 3s entre uma pergunta e outra, com mensagem própria de cada etapa. */
+export const THINKING_MS = 3000;
+const THINKING_MESSAGES: string[][] = [
+  ["Analisando sua reação…", "Comparando com outros perfis…", "Anotando seu padrão…"],
+  ["Lendo o que passa na sua cabeça…", "Procurando o que se repete…", "Quase lá…"],
+  ["Entendendo seus momentos de silêncio…", "Cruzando com suas respostas…", "Anotando…"],
+  ["Vendo como você reage ao afastamento…", "Medindo seus limites…", "Falta só uma…"],
+];
 
 export interface QuizResultPayload {
   answers: AnsweredQuestion[];
@@ -83,6 +94,12 @@ export default function QuizEngine({ onComplete }: { onComplete: (result: QuizRe
       setPhase({ type: "transition" });
       return;
     }
+    setPhase({ type: "thinking", nextIndex });
+  }
+
+  function handleThinkingDone() {
+    if (phase.type !== "thinking") return;
+    const nextIndex = phase.nextIndex;
     setQuestionIndex(nextIndex);
     setPhase({ type: "question", questionIndex: nextIndex });
   }
@@ -102,7 +119,12 @@ export default function QuizEngine({ onComplete }: { onComplete: (result: QuizRe
     onComplete({ answers, profile, score });
   }
 
-  const phaseKey = phase.type === "question" ? `q-${QUESTIONS[phase.questionIndex].id}` : "transition";
+  const phaseKey =
+    phase.type === "question"
+      ? `q-${QUESTIONS[phase.questionIndex].id}`
+      : phase.type === "thinking"
+        ? `t-${phase.nextIndex}`
+        : "transition";
 
   return (
     <div key={phaseKey} className="min-h-dvh overflow-x-hidden bg-ink">
@@ -114,6 +136,12 @@ export default function QuizEngine({ onComplete }: { onComplete: (result: QuizRe
           canGoBack={phase.questionIndex > 0}
           onBack={handleBack}
           onAnswer={handleAnswer}
+        />
+      ) : phase.type === "thinking" ? (
+        <ThinkingLoader
+          durationMs={THINKING_MS}
+          messages={THINKING_MESSAGES[Math.min(phase.nextIndex - 1, THINKING_MESSAGES.length - 1)]}
+          onDone={handleThinkingDone}
         />
       ) : (
         <TransitionLoader onDone={handleTransitionDone} />
