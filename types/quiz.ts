@@ -41,6 +41,8 @@ export interface ResultProfile {
   name: string;
   /** Uma frase que resume o padrão. */
   line: string;
+  /** O que continua acontecendo se nada mudar (3 itens curtos). */
+  costs: [string, string, string];
   /** Três ações curtas. */
   tips: [string, string, string];
 }

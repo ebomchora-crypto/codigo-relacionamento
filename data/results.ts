@@ -6,6 +6,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
     id: "anxiety",
     name: "Modo Alerta",
     line: "O silêncio ocupa a sua cabeça por inteiro.",
+    costs: ["Reler a conversa mil vezes.", "Mandar a 2ª mensagem e se arrepender.", "Perder o sono esperando um “online”."],
     tips: [
       "Não envie nada no pico da ansiedade.",
       "Troque cobrança por uma frase calma.",
@@ -16,6 +17,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
     id: "limits",
     name: "Quem Dá Mais",
     line: "Você corre atrás mais do que recebe.",
+    costs: ["Dar mais do que recebe.", "Aceitar migalhas de atenção.", "Se esforçar sozinho(a) pela relação."],
     tips: [
       "Note onde você cede só para evitar conflito.",
       "Diga um limite sem se justificar.",
@@ -26,6 +28,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
     id: "communication",
     name: "Rascunho Eterno",
     line: "Você sente muito, mas diz pouco.",
+    costs: ["Escrever e apagar tudo.", "Dizer “tô bem” sem estar.", "Deixar o mais importante sem dizer."],
     tips: [
       "Escreva o que sente antes de conversar.",
       "Troque acusação por “eu sinto…”.",
@@ -36,6 +39,7 @@ export const RESULT_PROFILES: Record<string, ResultProfile> = {
     id: "balanced",
     name: "Calma Ativa",
     line: "Você mantém a calma. Falta blindá-la.",
+    costs: ["Ignorar sinais por confiar demais.", "Deixar expectativas sem alinhar.", "Ceder em silêncio quando importa."],
     tips: [
       "Continue observando se o esforço é recíproco.",
       "Reforce os limites que já funcionam.",

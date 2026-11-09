@@ -33,7 +33,7 @@ export default function PricingOffer() {
       <Container>
         <Reveal y={28} className="relative overflow-hidden rounded-3xl border border-gold/25 bg-ink-soft p-6 shadow-gold sm:p-10">
           <SectionLabel className="relative">E-book digital</SectionLabel>
-          <h2 className="relative mt-3 font-display text-2xl font-semibold text-paper sm:text-3xl">
+          <h2 className="relative mt-3 font-display text-3xl font-semibold text-paper">
             {PRODUCT_NAME}
           </h2>
           <p className="relative mt-1 text-base text-gold-soft">
@@ -65,6 +65,14 @@ export default function PricingOffer() {
               <Button onClick={handleCheckoutClick} className="min-h-14 w-full">
                 Quero o guia agora
               </Button>
+
+              <div className="flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold/[0.07] p-3.5">
+                <ShieldCheck size={22} className="mt-0.5 shrink-0 text-gold" />
+                <p className="text-sm leading-snug text-paper">
+                  <span className="font-semibold text-gold-soft">Garantia de 7 dias.</span> Não
+                  gostou? Peça o reembolso pela plataforma.
+                </p>
+              </div>
 
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-mist">
                 <span className="flex items-center gap-1.5">

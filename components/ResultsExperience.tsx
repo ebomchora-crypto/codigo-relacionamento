@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import ResultHero from "@/components/results/ResultHero";
-import ModulesList from "@/components/offer/ModulesList";
+import PainBridge from "@/components/offer/PainBridge";
+import ChatExample from "@/components/offer/ChatExample";
+import BenefitsGrid from "@/components/offer/BenefitsGrid";
 import SocialProof from "@/components/offer/SocialProof";
 import PricingOffer from "@/components/offer/PricingOffer";
 import FaqAccordion from "@/components/offer/FaqAccordion";
+import FinalCta from "@/components/offer/FinalCta";
 import StickyCta from "@/components/offer/StickyCta";
 import SiteFooter from "@/components/SiteFooter";
 import { RESULT_PROFILES } from "@/data/results";
@@ -68,14 +71,17 @@ export default function ResultsExperience({ profile, score }: { profile: Dimensi
       <div ref={heroRef}>
         <ResultHero profile={resultProfile} score={score} onViewOffer={scrollToOffer} />
       </div>
+      <PainBridge profile={resultProfile} />
+      <ChatExample />
+      <BenefitsGrid />
+      <SocialProof />
       <div ref={offerRef}>
         <div ref={pricingRef}>
           <PricingOffer />
         </div>
       </div>
-      <SocialProof />
-      <ModulesList />
       <FaqAccordion />
+      <FinalCta />
       <SiteFooter />
       <StickyCta visible={pastHero && !pricingVisible} />
     </div>
