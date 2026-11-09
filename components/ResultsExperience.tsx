@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import ResultHero from "@/components/results/ResultHero";
+import OfferHero from "@/components/offer/OfferHero";
 import PainBridge from "@/components/offer/PainBridge";
 import ChatExample from "@/components/offer/ChatExample";
 import BenefitsGrid from "@/components/offer/BenefitsGrid";
@@ -62,14 +63,11 @@ export default function ResultsExperience({ profile, score }: { profile: Dimensi
     };
   }, []);
 
-  function scrollToOffer() {
-    offerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   return (
     <div>
       <div ref={heroRef}>
-        <ResultHero profile={resultProfile} score={score} onViewOffer={scrollToOffer} />
+        <ResultHero profile={resultProfile} score={score} />
+        <OfferHero />
       </div>
       <PainBridge profile={resultProfile} />
       <ChatExample />

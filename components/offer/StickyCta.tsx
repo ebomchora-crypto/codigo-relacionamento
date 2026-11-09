@@ -17,7 +17,7 @@ export default function StickyCta({ visible }: { visible: boolean }) {
           style={{ bottom: "var(--consent-h, 0px)" }}
           className="fixed inset-x-0 z-40 border-t border-gold/20 bg-ink pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3 sm:hidden"
         >
-          <div className="mx-auto flex max-w-2xl items-center gap-4 px-5">
+          <div className="mx-auto flex max-w-2xl items-center gap-3 px-4">
             <div className="shrink-0 leading-tight">
               <p className="text-[11px] uppercase tracking-wide text-mist">Acesso digital</p>
               <p className="font-display text-lg font-semibold text-gold-soft">{formatPrice(PRICE)}</p>
@@ -28,9 +28,9 @@ export default function StickyCta({ visible }: { visible: boolean }) {
                 haptic(15);
                 startCheckout();
               }}
-              className="btn-shine focus-ring min-h-12 flex-1 rounded-full bg-gold-fade px-5 text-sm font-semibold text-ink shadow-gold transition active:scale-[0.97]"
+              className="btn-shine focus-ring min-h-12 flex-1 whitespace-nowrap rounded-full bg-gold-fade px-3 text-[13px] font-semibold text-ink shadow-gold transition active:scale-[0.97]"
             >
-              Quero o guia agora
+              Quero acessar o guia
             </button>
           </div>
         </motion.div>

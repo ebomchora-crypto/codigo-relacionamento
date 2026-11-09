@@ -5,26 +5,36 @@ export interface FaqItem {
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "Isso funciona para quem terminou um relacionamento?",
+    question: "Como eu recebo o e-book?",
     answer:
-      "O guia pode ajudar a compreender sentimentos e melhorar a comunicação, mas não garante reconciliação.",
+      "Assim que o pagamento é confirmado, o acesso chega pela plataforma de pagamento (Kiwify), no e-mail que você usar na compra.",
   },
   {
-    question: "Vou conseguir fazer alguém voltar a gostar de mim?",
+    question: "Posso ler no celular?",
+    answer: "Sim. É um e-book digital: dá para ler no celular ou no computador.",
+  },
+  {
+    question: "O que tem dentro?",
     answer:
-      "Não existe método capaz de controlar os sentimentos de outra pessoa. O conteúdo ensina atitudes de comunicação e segurança emocional.",
+      "6 módulos práticos: reconhecer o impulso, ler o afastamento, dar espaço, comunicar sem carência, ver a reciprocidade e lidar com a incerteza.",
   },
   {
-    question: "Como recebo o e-book?",
+    question: "Como é o pagamento?",
     answer:
-      "Após a confirmação do pagamento, você recebe as instruções de acesso pela plataforma de entrega.",
+      "O pagamento é feito no ambiente seguro da Kiwify, por R$ 29,90. As formas de pagamento aparecem na tela de compra.",
   },
   {
-    question: "Posso ler pelo celular?",
-    answer: "Sim, desde que o arquivo seja disponibilizado em formato compatível.",
+    question: "Vai fazer a pessoa voltar a gostar de mim?",
+    answer:
+      "Não. Ninguém controla o sentimento do outro e o guia não promete isso. Ele ensina o que está nas suas mãos: como reagir, o que dizer e como se manter firme.",
   },
   {
-    question: "Existe garantia?",
-    answer: "Sim, de 7 dias, conforme as condições da compra.",
+    question: "Serve para quem terminou o relacionamento?",
+    answer:
+      "Pode ajudar a entender o que você sente e a conversar melhor, mas não garante reconciliação.",
+  },
+  {
+    question: "E se eu não gostar?",
+    answer: "Você tem 7 dias de garantia. Se não gostar, peça o reembolso pela plataforma dentro do prazo.",
   },
 ];

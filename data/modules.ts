@@ -8,33 +8,32 @@ export const PRODUCT_MODULES: ProductModule[] = [
   {
     number: "01",
     title: "O Erro Invisível",
-    description: "Entenda como reações impulsivas podem aumentar o desgaste emocional.",
+    description: "Reconhecer o gesto que afasta a pessoa sem você perceber.",
   },
   {
     number: "02",
     title: "Quando a Pessoa Esfria",
-    description: "Aprenda a reconhecer o afastamento e agir com mais consciência.",
+    description: "Ler os sinais de afastamento sem entrar em pânico.",
   },
   {
     number: "03",
     title: "O Poder de Dar Espaço",
-    description:
-      "Compreenda a diferença entre respeitar limites e utilizar silêncio como estratégia de manipulação.",
+    description: "Dar espaço sem se anular e sem usar o silêncio como jogo.",
   },
   {
     number: "04",
     title: "Comunicação Sem Carência",
-    description: "Aprenda a expressar sentimentos sem cobranças excessivas.",
+    description: "Pedir atenção sem cobrar e sem parecer carente.",
   },
   {
     number: "05",
     title: "Reconhecendo Reciprocidade",
-    description: "Identifique quando existe esforço mútuo e quando uma conexão está desequilibrada.",
+    description: "Ver se o esforço é dos dois ou só seu.",
   },
   {
     number: "06",
     title: "Segurança Emocional",
-    description: "Desenvolva atitudes para lidar melhor com incerteza, ansiedade e rejeição.",
+    description: "Aguentar a incerteza sem agir no impulso.",
   },
 ];
 

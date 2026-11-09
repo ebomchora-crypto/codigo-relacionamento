@@ -11,7 +11,7 @@ export default function EbookCoverArt({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "relative mx-auto aspect-square w-full max-w-[320px] animate-float overflow-hidden rounded-xl border border-gold/25 shadow-gold",
+        "relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-xl border border-gold/25 shadow-gold",
         className,
       )}
     >
@@ -22,10 +22,6 @@ export default function EbookCoverArt({ className }: { className?: string }) {
         sizes="(min-width: 640px) 320px, 80vw"
         quality={85}
         className="object-cover"
-      />
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-y-0 -left-1/3 w-1/3 animate-cover-shine bg-gradient-to-r from-transparent via-white/15 to-transparent"
       />
     </div>
   );

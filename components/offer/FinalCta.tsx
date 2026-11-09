@@ -12,7 +12,7 @@ export default function FinalCta() {
     <section className="bg-ink py-12">
       <Container className="text-center">
         <p className="font-display text-2xl font-semibold leading-snug text-paper">
-          O silêncio não precisa decidir por você.
+          Da próxima vez que a pessoa demorar, você pode agir diferente.
         </p>
         <Button
           onClick={() => {
@@ -21,9 +21,9 @@ export default function FinalCta() {
           }}
           className="mt-6 min-h-14 w-full"
         >
-          Quero o guia por {formatPrice(PRICE)}
+          Quero acessar o guia
         </Button>
-        <p className="mt-3 text-xs text-mist">Pagamento seguro · Acesso imediato · Garantia de 7 dias</p>
+        <p className="mt-3 text-sm text-mist">{formatPrice(PRICE)} · Acesso imediato · Garantia de 7 dias</p>
       </Container>
     </section>
   );

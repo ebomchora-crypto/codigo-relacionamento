@@ -19,9 +19,8 @@ export default function BenefitsGrid() {
     <section className="bg-ink-soft py-12">
       <Container>
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Dentro do guia</p>
-          <h2 className="mt-2 font-display text-2xl font-semibold leading-tight text-paper">
-            6 passos para parar de agir no impulso
+          <h2 className="font-display text-2xl font-semibold leading-tight text-paper">
+            O que você vai saber fazer
           </h2>
         </Reveal>
 
@@ -35,11 +34,10 @@ export default function BenefitsGrid() {
                     <Icon size={22} />
                   </span>
                   <div>
-                    <p className="font-display text-[1.05rem] font-semibold leading-tight text-paper">
-                      <span className="mr-1.5 text-sm text-gold">{m.number}</span>
-                      {m.title}
+                    <p className="text-[1.02rem] font-medium leading-snug text-paper">{m.description}</p>
+                    <p className="mt-1 text-xs text-mist">
+                      <span className="text-gold">Módulo {m.number}</span> · {m.title}
                     </p>
-                    <p className="mt-1 text-sm leading-snug text-mist">{m.description}</p>
                   </div>
                 </div>
               </Reveal>

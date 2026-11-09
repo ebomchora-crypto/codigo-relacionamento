@@ -9,11 +9,8 @@ export default function PainBridge({ profile }: { profile: ResultProfile }) {
     <section className="bg-ink-soft py-12">
       <Container>
         <Reveal>
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">
-            {profile.name}
-          </p>
-          <h2 className="mt-2 font-display text-2xl font-semibold leading-tight text-paper">
-            Se nada mudar, isso continua:
+          <h2 className="font-display text-2xl font-semibold leading-tight text-paper">
+            Isso descreve o que você vive?
           </h2>
         </Reveal>
         <ul className="mt-6 flex flex-col gap-3">
@@ -28,11 +25,6 @@ export default function PainBridge({ profile }: { profile: ResultProfile }) {
             </Reveal>
           ))}
         </ul>
-        <Reveal delay={0.3}>
-          <p className="mt-6 font-display text-lg text-gold-soft">
-            Não é falta de sorte. É falta de método.
-          </p>
-        </Reveal>
       </Container>
     </section>
   );

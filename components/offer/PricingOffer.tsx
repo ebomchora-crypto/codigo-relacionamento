@@ -11,9 +11,9 @@ import { startCheckout } from "@/lib/checkout/start";
 import { haptic } from "@/lib/haptics";
 
 const FEATURES = [
-  "Passo a passo para o seu padrão.",
-  "Frases prontas, sem parecer carente.",
-  "Leia no celular, na hora.",
+  "E-book digital com 6 módulos práticos.",
+  "Leitura no celular ou no computador.",
+  "Acesso imediato após o pagamento.",
   "Garantia de 7 dias.",
 ];
 
@@ -63,7 +63,7 @@ export default function PricingOffer() {
               </div>
 
               <Button onClick={handleCheckoutClick} className="min-h-14 w-full">
-                Quero o guia agora
+                Quero acessar o guia
               </Button>
 
               <div className="flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold/[0.07] p-3.5">

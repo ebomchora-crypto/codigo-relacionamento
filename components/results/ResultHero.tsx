@@ -1,8 +1,6 @@
 "use client";
 
-import { Check } from "lucide-react";
 import Container from "@/components/ui/Container";
-import Button from "@/components/ui/Button";
 import AmbientBackground from "@/components/ui/AmbientBackground";
 import { DIMENSION_LABELS } from "@/data/results";
 import { cn } from "@/lib/utils";
@@ -17,14 +15,12 @@ const ORDER: Dimension[] = ["anxiety", "limits", "communication", "balanced"];
 export default function ResultHero({
   profile,
   score,
-  onViewOffer,
 }: {
   profile: ResultProfile;
   score: ScoreBreakdown;
-  onViewOffer: () => void;
 }) {
   return (
-    <section className="relative overflow-hidden bg-ink pb-12 pt-[max(2.5rem,env(safe-area-inset-top))]">
+    <section className="relative overflow-hidden bg-ink pb-8 pt-[max(2.5rem,env(safe-area-inset-top))]">
       <AmbientBackground />
       <Container className="relative">
         <p className="animate-fade-up text-xs font-semibold uppercase tracking-[0.18em] text-gold">
@@ -75,29 +71,6 @@ export default function ResultHero({
           })}
         </div>
 
-        <ul className="mt-6 flex flex-col gap-3">
-          {profile.tips.map((tip, i) => (
-            <li
-              key={tip}
-              className="flex animate-fade-up items-start gap-3 text-[1.02rem] leading-snug text-paper"
-              style={{ animationDelay: `${400 + i * 90}ms` }}
-            >
-              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold">
-                <Check size={14} strokeWidth={3} />
-              </span>
-              {tip}
-            </li>
-          ))}
-        </ul>
-
-        <div className="mt-8 animate-fade-up" style={{ animationDelay: "700ms" }}>
-          <p className="font-display text-xl font-semibold leading-snug text-paper">
-            Saber o padrão é o 1º passo. O guia mostra o 2º.
-          </p>
-          <Button onClick={onViewOffer} className="mt-4 min-h-14 w-full">
-            Ver o guia do meu padrão
-          </Button>
-        </div>
       </Container>
     </section>
   );
