@@ -1,9 +1,11 @@
 export type Dimension = "anxiety" | "limits" | "communication" | "balanced";
 
-export type QuestionKind = "behavior" | "context" | "goal";
+export type QuestionKind = "behavior";
 
 export interface QuizOption {
   id: "A" | "B" | "C" | "D";
+  /** Emoji que ajuda a bater o olho e reconhecer a alternativa. */
+  emoji?: string;
   label: string;
   /**
    * Dimensão associada a esta alternativa. `null` quando a alternativa não
@@ -27,14 +29,6 @@ export interface PhotoRef {
   tint?: boolean;
 }
 
-export interface EngagementScreen {
-  image?: PhotoRef;
-  afterQuestionId: number;
-  title: string;
-  body: string;
-  cta: string;
-}
-
 export interface AnsweredQuestion {
   questionId: number;
   optionId: QuizOption["id"];
@@ -43,10 +37,12 @@ export interface AnsweredQuestion {
 export interface ResultProfile {
   image?: PhotoRef;
   id: Dimension;
-  label: string;
-  title: string;
-  body: string;
-  recommendations: [string, string, string];
+  /** Nome curto do padrão (aparece grande no resultado). */
+  name: string;
+  /** Uma frase que resume o padrão. */
+  line: string;
+  /** Três ações curtas. */
+  tips: [string, string, string];
 }
 
 export interface ScoreBreakdown {

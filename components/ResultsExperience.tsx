@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import ResultHero from "@/components/results/ResultHero";
-import ProductShowcase from "@/components/offer/ProductShowcase";
 import ModulesList from "@/components/offer/ModulesList";
 import SocialProof from "@/components/offer/SocialProof";
 import PricingOffer from "@/components/offer/PricingOffer";
@@ -11,9 +10,9 @@ import StickyCta from "@/components/offer/StickyCta";
 import SiteFooter from "@/components/SiteFooter";
 import { RESULT_PROFILES } from "@/data/results";
 import { trackViewContent } from "@/lib/analytics/events";
-import type { Dimension } from "@/types/quiz";
+import type { Dimension, ScoreBreakdown } from "@/types/quiz";
 
-export default function ResultsExperience({ profile }: { profile: Dimension }) {
+export default function ResultsExperience({ profile, score }: { profile: Dimension; score: ScoreBreakdown }) {
   const heroRef = useRef<HTMLDivElement>(null);
   const offerRef = useRef<HTMLDivElement>(null);
   const pricingRef = useRef<HTMLDivElement>(null);
@@ -67,16 +66,15 @@ export default function ResultsExperience({ profile }: { profile: Dimension }) {
   return (
     <div>
       <div ref={heroRef}>
-        <ResultHero profile={resultProfile} onViewOffer={scrollToOffer} />
+        <ResultHero profile={resultProfile} score={score} onViewOffer={scrollToOffer} />
       </div>
       <div ref={offerRef}>
-        <ProductShowcase />
+        <div ref={pricingRef}>
+          <PricingOffer />
+        </div>
       </div>
-      <ModulesList />
       <SocialProof />
-      <div ref={pricingRef}>
-        <PricingOffer />
-      </div>
+      <ModulesList />
       <FaqAccordion />
       <SiteFooter />
       <StickyCta visible={pastHero && !pricingVisible} />

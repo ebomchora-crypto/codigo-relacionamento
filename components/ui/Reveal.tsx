@@ -1,6 +1,30 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef, type CSSProperties } from "react";
+
+/**
+ * Reveal leve: um único IntersectionObserver compartilhado e animação só de
+ * opacity/transform via CSS (sem JS por frame), para não travar em celulares
+ * mais simples.
+ */
+let observer: IntersectionObserver | null = null;
+
+function getObserver(): IntersectionObserver {
+  if (!observer) {
+    observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            observer?.unobserve(entry.target);
+          }
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+  }
+  return observer;
+}
 
 export default function Reveal({
   children,
@@ -15,15 +39,20 @@ export default function Reveal({
   as?: "div" | "li" | "section";
   className?: string;
 }) {
-  const Comp = as === "li" ? motion.li : as === "section" ? motion.section : motion.div;
+  const ref = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = getObserver();
+    io.observe(el);
+    return () => io.unobserve(el);
+  }, []);
+
+  const Comp = as as "div";
+  const style = { "--rv-y": `${y}px`, "--rv-d": `${delay}s` } as CSSProperties;
   return (
-    <Comp
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "0px 0px -8% 0px" }}
-      transition={{ duration: 0.6, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <Comp ref={ref as React.RefObject<HTMLDivElement>} className={`rv${className ? ` ${className}` : ""}`} style={style}>
       {children}
     </Comp>
   );

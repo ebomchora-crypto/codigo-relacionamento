@@ -1,74 +1,58 @@
 "use client";
 
 import { Check } from "lucide-react";
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 
+/** Alternativa: CSS puro (transform/opacity), alvo de toque grande. */
 export default function OptionButton({
   label,
-  letter,
+  emoji,
   selected,
+  dimmed,
   disabled,
+  delay,
   onSelect,
 }: {
   label: string;
-  letter: string;
+  emoji?: string;
   selected: boolean;
+  dimmed: boolean;
   disabled?: boolean;
+  delay: number;
   onSelect: () => void;
 }) {
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onSelect}
       disabled={disabled}
       aria-pressed={selected}
-      whileTap={disabled ? undefined : { scale: 0.975 }}
-      animate={
-        selected
-          ? { scale: 1.015 }
-          : disabled
-            ? { scale: 0.98, opacity: 0.35, filter: "blur(1px)" }
-            : { scale: 1, opacity: 1, filter: "blur(0px)" }
-      }
-      transition={{ type: "spring", stiffness: 420, damping: 28 }}
+      style={{ animationDelay: `${delay}ms` }}
       className={cn(
-        "focus-ring group relative flex min-h-[3.75rem] w-full items-center gap-4 overflow-hidden rounded-2xl border px-4 py-3.5 text-left sm:px-5",
-        "border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] backdrop-blur-[2px]",
-        "transition-[border-color,background-color,box-shadow] duration-200",
-        "hover:border-gold/40 hover:shadow-[0_12px_30px_-16px_rgba(198,161,91,0.35)]",
-        selected && "border-gold/70 bg-gold/[0.09] shadow-gold",
-        disabled && !selected && "pointer-events-none",
+        "focus-ring relative flex min-h-[3.5rem] w-full animate-opt-in items-center gap-3.5 rounded-2xl border px-4 py-2.5 text-left",
+        "border-white/10 bg-white/[0.04] transition-[transform,opacity,border-color,background-color] duration-150",
+        "active:scale-[0.97]",
+        selected && "scale-[1.02] border-gold bg-gold/[0.14]",
+        dimmed && "opacity-40",
       )}
     >
-      {selected && (
-        <span aria-hidden className="pointer-events-none absolute left-4 top-1/2 h-9 w-9 -translate-y-1/2 sm:left-5">
-          <motion.span
-            className="block h-full w-full rounded-full bg-gold/60"
-            initial={{ scale: 0.3, opacity: 0.7 }}
-            animate={{ scale: 9, opacity: 0 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          />
-        </span>
-      )}
-
+      <span aria-hidden className="w-8 shrink-0 text-center text-[1.6rem] leading-none">
+        {emoji}
+      </span>
+      <span className="flex-1 text-[1.02rem] font-medium leading-snug text-paper">{label}</span>
       <span
+        aria-hidden
         className={cn(
-          "relative flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border font-display text-sm font-semibold transition-colors duration-200",
-          selected
-            ? "border-transparent bg-gold-fade text-ink"
-            : "border-white/15 bg-white/[0.02] text-mist group-hover:border-gold/50 group-hover:text-gold-soft",
+          "flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-colors duration-150",
+          selected ? "border-transparent bg-gold-fade text-ink" : "border-white/15",
         )}
       >
-        {selected ? (
-          <motion.span initial={{ scale: 0, rotate: -40 }} animate={{ scale: 1, rotate: 0 }} transition={{ type: "spring", stiffness: 500, damping: 20 }}>
-            <Check size={16} strokeWidth={3} />
-          </motion.span>
-        ) : (
-          letter
+        {selected && (
+          <span className="animate-pop">
+            <Check size={15} strokeWidth={3.5} />
+          </span>
         )}
       </span>
-      <span className="relative text-[0.98rem] leading-snug text-paper sm:text-base">{label}</span>
-    </motion.button>
+    </button>
   );
 }

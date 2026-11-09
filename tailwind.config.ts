@@ -45,6 +45,27 @@ const config: Config = {
           "0%, 100%": { transform: "translate3d(0,0,0) scale(1.05)" },
           "50%": { transform: "translate3d(-7%,-4%,0) scale(0.95)" },
         },
+        "q-in": {
+          "0%": { opacity: "0", transform: "translate3d(28px,0,0)" },
+          "100%": { opacity: "1", transform: "translate3d(0,0,0)" },
+        },
+        "opt-in": {
+          "0%": { opacity: "0", transform: "translate3d(0,14px,0)" },
+          "100%": { opacity: "1", transform: "translate3d(0,0,0)" },
+        },
+        pop: {
+          "0%": { transform: "scale(0.4)", opacity: "0" },
+          "60%": { transform: "scale(1.15)", opacity: "1" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
+        "ping-soft": {
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "100%": { transform: "scale(2.2)", opacity: "0" },
+        },
+        "dot-bounce": {
+          "0%, 60%, 100%": { transform: "translate3d(0,0,0)", opacity: "0.4" },
+          "30%": { transform: "translate3d(0,-4px,0)", opacity: "1" },
+        },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
@@ -59,6 +80,11 @@ const config: Config = {
         shimmer: "shimmer 2.4s linear infinite",
         drift: "drift 18s ease-in-out infinite",
         "drift-reverse": "drift-reverse 24s ease-in-out infinite",
+        "q-in": "q-in 0.26s cubic-bezier(0.22,1,0.36,1) both",
+        "opt-in": "opt-in 0.32s cubic-bezier(0.22,1,0.36,1) both",
+        pop: "pop 0.3s cubic-bezier(0.22,1,0.36,1) both",
+        "ping-soft": "ping-soft 0.55s ease-out both",
+        "dot-bounce": "dot-bounce 1.1s ease-in-out infinite",
         float: "float 7s ease-in-out infinite",
         "cover-shine": "cover-shine 6s ease-in-out infinite",
       },

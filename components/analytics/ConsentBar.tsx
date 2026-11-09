@@ -47,25 +47,24 @@ export default function ConsentBar() {
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-ink-soft/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-md"
+          className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-ink-soft pb-[env(safe-area-inset-bottom)]"
         >
-          <div className="mx-auto flex max-w-3xl flex-col gap-3 px-5 py-3.5 sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-xs leading-relaxed text-mist sm:text-sm">
-              Usamos cookies para medir campanhas e melhorar sua experiência. Você pode aceitar ou
-              recusar.
+          <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2">
+            <p className="text-[11px] leading-snug text-mist sm:text-sm">
+              Cookies para medir anúncios.
             </p>
-            <div className="grid shrink-0 grid-cols-2 gap-2 sm:flex">
+            <div className="flex shrink-0 gap-2">
               <button
                 type="button"
                 onClick={() => decide("declined")}
-                className="focus-ring h-10 rounded-full border border-white/15 px-5 text-sm text-mist transition active:scale-95 hover:border-white/30 hover:text-paper"
+                className="focus-ring h-9 rounded-full border border-white/15 px-4 text-[13px] text-mist transition active:scale-95 hover:border-white/30 hover:text-paper"
               >
                 Recusar
               </button>
               <button
                 type="button"
                 onClick={() => decide("accepted")}
-                className="focus-ring h-10 rounded-full bg-gold-fade px-5 text-sm font-semibold text-ink transition active:scale-95 hover:opacity-90"
+                className="focus-ring h-9 rounded-full bg-gold-fade px-4 text-[13px] font-semibold text-ink transition active:scale-95 hover:opacity-90"
               >
                 Aceitar
               </button>

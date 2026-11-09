@@ -5,19 +5,12 @@ import type { AnsweredQuestion, Dimension, ScoreBreakdown } from "@/types/quiz";
  * Motor de classificação do quiz.
  *
  * Como funciona:
- * 1. Cada pergunta do tipo "behavior" (perguntas 2, 3, 4, 6 e 7 — 5 no
- *    total) tem peso 1 e associa cada alternativa a uma dimensão
- *    (anxiety | limits | communication | balanced).
- * 2. A pergunta "context" (pergunta 1) e as perguntas "goal" (5 e 8) nunca
- *    pontuam — elas não entram nesta soma. Isso evita tratar toda resposta
- *    como sintoma e evita atribuir rótulos emocionais a partir de objetivos
- *    pessoais; as perguntas de objetivo servem apenas para personalizar a
- *    ênfase das recomendações exibidas no resultado.
- * 3. A dimensão com maior soma é a dimensão predominante (plural simples).
- *    Como há 5 perguntas pontuáveis distribuídas entre 4 dimensões, pelo
- *    princípio da casa dos pombos a dimensão líder tem sempre pontuação
- *    >= 2 — ou seja, sempre existe algum padrão com pelo menos duas
- *    respostas confirmando-o.
+ * 1. As 5 perguntas do quiz são pontuáveis, com peso 1. Cada alternativa
+ *    soma 1 ponto para uma dimensão (anxiety | limits | communication |
+ *    balanced); em cada pergunta as 4 alternativas cobrem as 4 dimensões.
+ * 2. A dimensão com maior soma é a predominante. Como há 5 respostas
+ *    distribuídas entre 4 dimensões, pelo princípio da casa dos pombos a
+ *    dimensão líder sempre tem pelo menos 2 pontos.
  *
  * Critério de desempate (quando duas ou mais dimensões empatam no topo):
  * - Se "balanced" empata com uma dimensão de dificuldade (anxiety, limits

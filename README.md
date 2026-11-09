@@ -4,7 +4,7 @@ Quiz funnel completo em Next.js (App Router) + TypeScript + Tailwind CSS +
 Framer Motion para o e-book **O Código do Silêncio: Como Reativar o
 Interesse Sem Parecer Carente**.
 
-Fluxo: tela de gancho → 8 perguntas com telas de engajamento → transição →
+Fluxo: pergunta 1 já com o gancho (visualizou e sumiu?) → 5 perguntas seguidas, sem telas de pausa → leitura de 1,3s →
 resultado personalizado → apresentação do produto → módulos → prévia de
 conteúdo → oferta (Kiwify) → FAQ.
 
@@ -95,7 +95,7 @@ Eventos implementados (`lib/analytics/events.ts`):
 | `ViewContent`        | Quando a seção de oferta entra na tela (IntersectionObserver) |
 | `QuizStart` (custom)         | Início do quiz |
 | `QuizAnswer` (custom)        | A cada resposta — envia apenas o número da pergunta, nunca o conteúdo da resposta |
-| `QuizComplete` (custom)      | Ao concluir as 8 perguntas |
+| `QuizComplete` (custom)      | Ao concluir as 5 perguntas |
 | `InitiateCheckout`   | Clique efetivo no botão de compra, antes do redirecionamento |
 | `Purchase`           | **Somente** pelo webhook servidor-a-servidor da Kiwify (ver seção 2) |
 
@@ -133,9 +133,8 @@ do otimizador de imagens).
 
 Todo o conteúdo fica separado da camada visual, em `data/`:
 
-- `data/questions.ts` — as 8 perguntas, alternativas e a dimensão associada
+- `data/questions.ts` — as 5 perguntas, alternativas (com emoji) e a dimensão associada
   a cada alternativa (usada na pontuação).
-- `data/engagement-screens.ts` — as telas de engajamento entre perguntas.
 - `data/results.ts` — os 4 perfis de resultado (título, texto,
   recomendações).
 - `data/modules.ts` — os 6 módulos do produto e a lista de benefícios.
@@ -231,7 +230,7 @@ Build de produção (`npm run build`) e checagem de tipos
 foi exercitada de ponta a ponta com Playwright (Chromium) contra o build de
 produção:
 
-- ✅ Todas as 8 perguntas e as 4 alternativas de cada uma — fluxo completo
+- ✅ Todas as 5 perguntas e as 4 alternativas de cada uma — fluxo completo
   testado em viewport mobile (390px), sem erros de console/página.
 - ✅ Botão "voltar" — volta para a pergunta anterior corretamente e
   permite responder novamente.
@@ -317,7 +316,7 @@ As fotos em `public/images/` vêm do [Pexels](https://www.pexels.com/license/)
 (licença gratuita, uso comercial permitido, atribuição não obrigatória) e são
 usadas apenas como fundo decorativo (`components/ui/PhotoBackdrop.tsx`). Para
 trocar, substitua o arquivo (use um nome novo para evitar cache do otimizador
-de imagens) e ajuste `data/engagement-screens.ts`, `data/results.ts` ou os
+de imagens) e ajuste `data/results.ts` ou os
 componentes da oferta.
 
 ---

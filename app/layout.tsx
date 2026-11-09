@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: `${PRODUCT_NAME} — ${PRODUCT_SUBTITLE}`,
   description:
-    "Responda 8 perguntas rápidas e descubra quais padrões de comunicação podem estar afetando sua tranquilidade emocional.",
+    "Responda 5 perguntas e descubra qual é o seu padrão quando a pessoa visualiza e some.",
   openGraph: {
     title: PRODUCT_NAME,
     description: PRODUCT_SUBTITLE,

@@ -1,98 +1,103 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { Check } from "lucide-react";
 import Container from "@/components/ui/Container";
-import SectionLabel from "@/components/ui/SectionLabel";
 import Button from "@/components/ui/Button";
 import AmbientBackground from "@/components/ui/AmbientBackground";
-import PhotoBackdrop from "@/components/ui/PhotoBackdrop";
-import WordReveal from "@/components/ui/WordReveal";
-import Reveal from "@/components/ui/Reveal";
-import type { ResultProfile } from "@/types/quiz";
+import { DIMENSION_LABELS } from "@/data/results";
+import { cn } from "@/lib/utils";
+import type { Dimension, ResultProfile, ScoreBreakdown } from "@/types/quiz";
 
+const ORDER: Dimension[] = ["anxiety", "limits", "communication", "balanced"];
+
+/**
+ * Resultado em 5 segundos: nome do padrão (grande), uma frase, o medidor
+ * visual das 4 dimensões e 3 ações curtas. Só transform/opacity animam.
+ */
 export default function ResultHero({
   profile,
+  score,
   onViewOffer,
 }: {
   profile: ResultProfile;
+  score: ScoreBreakdown;
   onViewOffer: () => void;
 }) {
-  const titleWords = profile.title.split(" ").length;
-  const afterTitle = 0.5 + titleWords * 0.05;
-
   return (
-    <section className="texture-grain relative overflow-hidden bg-ink py-14 sm:py-20">
-      {profile.image && (
-        <PhotoBackdrop
-          photo={profile.image}
-          className="inset-x-0 bottom-auto h-[26rem]"
-          opacity={0.34}
-        />
-      )}
+    <section className="relative overflow-hidden bg-ink pb-12 pt-[max(2.5rem,env(safe-area-inset-top))]">
       <AmbientBackground />
       <Container className="relative">
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.2 }}>
-          <SectionLabel>Seu resultado personalizado</SectionLabel>
-          <motion.span
-            className="mt-3 block h-px bg-gold-fade"
-            initial={{ width: 0 }}
-            animate={{ width: 56 }}
-            transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          />
-        </motion.div>
-
-        <h1 className="mt-5 text-balance font-display text-[1.75rem] font-semibold leading-[1.2] text-paper sm:text-4xl">
-          <WordReveal text={profile.title} delay={0.5} />
+        <p className="animate-fade-up text-xs font-semibold uppercase tracking-[0.18em] text-gold">
+          Seu padrão
+        </p>
+        <h1
+          className="mt-2 animate-fade-up font-display text-[2.6rem] font-bold leading-[1.05] text-paper min-[380px]:text-5xl"
+          style={{ animationDelay: "80ms" }}
+        >
+          {profile.name}
         </h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: afterTitle }}
-          className="mt-5 text-base leading-relaxed text-mist sm:text-lg"
+        <p
+          className="mt-3 animate-fade-up text-lg font-medium leading-snug text-gold-soft"
+          style={{ animationDelay: "160ms" }}
         >
-          {profile.body}
-        </motion.p>
+          {profile.line}
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: afterTitle + 0.3 }}
-          className="mt-10 rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.04] to-white/[0.01] p-6 shadow-card backdrop-blur-sm sm:p-8"
+        <div
+          className="meter-on mt-8 flex animate-fade-up flex-col gap-3.5 rounded-2xl border border-white/10 bg-white/[0.04] p-4"
+          style={{ animationDelay: "240ms" }}
         >
-          <h2 className="font-display text-lg font-semibold text-gold-soft">
-            O que você pode fazer a partir de agora?
-          </h2>
-          <ol className="mt-5 flex flex-col gap-4">
-            {profile.recommendations.map((item, index) => (
-              <motion.li
-                key={item}
-                initial={{ opacity: 0, x: -16 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.55, delay: afterTitle + 0.7 + index * 0.18 }}
-                className="flex gap-4 text-sm leading-relaxed text-paper sm:text-base"
-              >
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-gold/40 bg-gold/5 text-xs font-semibold text-gold">
-                  {index + 1}
+          {ORDER.map((dim, row) => {
+            const value = score[dim];
+            const leader = dim === profile.id;
+            return (
+              <div key={dim} className="flex items-center gap-3">
+                <span className={cn("w-[5.6rem] shrink-0 text-[13px]", leader ? "font-semibold text-paper" : "text-mist")}>
+                  {DIMENSION_LABELS[dim]}
                 </span>
-                <span className="pt-0.5">{item}</span>
-              </motion.li>
-            ))}
-          </ol>
-        </motion.div>
+                <div className="flex flex-1 gap-1">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <span key={i} className="h-2.5 flex-1 overflow-hidden rounded-full bg-white/10">
+                      {i < value && (
+                        <span
+                          className={cn(
+                            "meter-seg meter-seg-on block h-full rounded-full",
+                            leader ? "bg-gold-fade" : "bg-mist/70",
+                          )}
+                          style={{ ["--d" as string]: `${0.5 + row * 0.12 + i * 0.07}s` }}
+                        />
+                      )}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
-        <Reveal className="mt-12 flex flex-col gap-5 border-t border-white/10 pt-10">
-          <h3 className="text-balance font-display text-xl font-semibold leading-snug text-paper sm:text-2xl">
-            Entender o que acontece é o primeiro passo. Aprender a agir é o próximo.
-          </h3>
-          <p className="text-base leading-relaxed text-mist">
-            Você pode desenvolver uma forma mais tranquila e segura de lidar com conversas
-            difíceis, afastamentos e expectativas.
+        <ul className="mt-6 flex flex-col gap-3">
+          {profile.tips.map((tip, i) => (
+            <li
+              key={tip}
+              className="flex animate-fade-up items-start gap-3 text-[1.02rem] leading-snug text-paper"
+              style={{ animationDelay: `${400 + i * 90}ms` }}
+            >
+              <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <Check size={14} strokeWidth={3} />
+              </span>
+              {tip}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-8 animate-fade-up" style={{ animationDelay: "700ms" }}>
+          <p className="font-display text-xl font-semibold leading-snug text-paper">
+            Saber o padrão é o 1º passo. O guia mostra o 2º.
           </p>
-          <Button onClick={onViewOffer} className="min-h-14 w-full sm:w-auto">
-            Conhecer o guia
+          <Button onClick={onViewOffer} className="mt-4 min-h-14 w-full">
+            Ver o guia do meu padrão
           </Button>
-        </Reveal>
+        </div>
       </Container>
     </section>
   );

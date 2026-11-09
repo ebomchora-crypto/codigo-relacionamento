@@ -1,8 +1,8 @@
 import { cn } from "@/lib/utils";
 
 /**
- * Fundo vivo: duas luzes douradas em gradiente radial (mais barato que blur
- * em mobile) que derivam lentamente. Só transform é animado.
+ * Fundo estático (gradientes radiais, sem blur e sem animação infinita):
+ * custo zero de GPU em celulares simples.
  */
 export default function AmbientBackground({
   position = "top",
@@ -18,23 +18,11 @@ export default function AmbientBackground({
           "absolute left-1/2 h-[120vw] w-[120vw] max-h-[42rem] max-w-[42rem] -translate-x-1/2",
           position === "top" ? "-top-[45%] sm:-top-1/3" : "top-1/2 -translate-y-1/2",
         )}
-      >
-        <div
-          className="h-full w-full animate-drift rounded-full"
-          style={{
-            background:
-              "radial-gradient(closest-side, rgba(198,161,91,0.16), rgba(198,161,91,0.05) 55%, transparent)",
-          }}
-        />
-      </div>
-      <div className="absolute -bottom-[25%] -right-[30%] h-[90vw] w-[90vw] max-h-[34rem] max-w-[34rem]">
-        <div
-          className="h-full w-full animate-drift-reverse rounded-full"
-          style={{
-            background: "radial-gradient(closest-side, rgba(228,201,144,0.08), transparent)",
-          }}
-        />
-      </div>
+        style={{
+          background:
+            "radial-gradient(closest-side, rgba(198,161,91,0.16), rgba(198,161,91,0.05) 55%, transparent)",
+        }}
+      />
     </div>
   );
 }

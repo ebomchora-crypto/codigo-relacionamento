@@ -104,3 +104,26 @@ body {
     transform: translateX(120%);
   }
 }
+
+/* Reveal leve (IntersectionObserver + transform/opacity). */
+.rv {
+  opacity: 0;
+  transform: translate3d(0, var(--rv-y, 20px), 0);
+  transition:
+    opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--rv-d, 0s),
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1) var(--rv-d, 0s);
+}
+.rv.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Barras de medidor: só transform. */
+.meter-seg {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s);
+}
+.meter-on .meter-seg-on {
+  transform: scaleX(1);
+}
