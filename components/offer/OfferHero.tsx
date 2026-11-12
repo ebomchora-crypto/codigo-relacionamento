@@ -12,13 +12,13 @@ import { haptic } from "@/lib/haptics";
  * Hero da oferta: problema, transformação e botão visíveis na primeira dobra
  * logo abaixo do resultado. Sem promessa de reconciliação.
  */
-export default function OfferHero() {
+export default function OfferHero({ onQuiz }: { onQuiz?: () => void }) {
   return (
-    <section className="bg-ink py-10">
+    <section className="bg-ink pb-10 pt-[max(2.5rem,env(safe-area-inset-top))]">
       <Container>
-        <h2 className="text-balance font-display text-[1.7rem] font-semibold leading-[1.15] text-paper min-[380px]:text-[1.95rem]">
+        <h1 className="text-balance font-display text-[1.7rem] font-semibold leading-[1.15] text-paper min-[380px]:text-[1.95rem]">
           A pessoa demora para responder. Você não precisa perder a paz por isso.
-        </h2>
+        </h1>
         <p className="mt-3 text-[1.02rem] leading-snug text-mist">
           Aprenda a lidar com o silêncio, segurar a vontade de mandar outra mensagem e conversar sem cobrança.
         </p>
@@ -49,6 +49,15 @@ export default function OfferHero() {
         <p className="mt-2.5 text-center text-sm text-mist">
           <span className="font-semibold text-gold-soft">{formatPrice(PRICE)}</span> · pagamento seguro
         </p>
+        {onQuiz && (
+          <button
+            type="button"
+            onClick={onQuiz}
+            className="focus-ring mx-auto mt-3 flex min-h-11 items-center justify-center text-[0.95rem] text-gold-soft underline decoration-gold/40 underline-offset-4"
+          >
+            Descobrir meu padrão em 30 segundos
+          </button>
+        )}
       </Container>
     </section>
   );
