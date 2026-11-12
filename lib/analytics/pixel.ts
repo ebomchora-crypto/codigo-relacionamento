@@ -20,6 +20,8 @@ export function loadMetaPixel(): void {
   if (initialized) return;
   if (typeof window === "undefined") return;
   if (!META_PIXEL_ID) return;
+  // Testes no computador não podem sujar o pixel de produção.
+  if (/^(localhost|127\.0\.0\.1|0\.0\.0\.0|\[::1\])$/.test(window.location.hostname)) return;
 
   try {
     initialized = true;

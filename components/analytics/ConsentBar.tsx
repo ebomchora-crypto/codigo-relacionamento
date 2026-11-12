@@ -42,29 +42,35 @@ export default function ConsentBar() {
         <motion.div
           ref={ref}
           role="dialog"
-          aria-label="Consentimento de cookies"
+          aria-labelledby="cookies-titulo"
           initial={{ y: "100%" }}
           animate={{ y: 0 }}
           exit={{ y: "100%" }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="fixed inset-x-0 bottom-0 z-50 border-t border-white/10 bg-ink-soft pb-[env(safe-area-inset-bottom)]"
         >
-          <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2">
-            <p className="text-[11px] leading-snug text-mist sm:text-sm">
-              Cookies para medir anúncios.
-            </p>
-            <div className="flex shrink-0 gap-2">
+          <div className="mx-auto flex max-w-3xl flex-col gap-3 px-4 py-3.5 sm:flex-row sm:items-center sm:gap-6">
+            <div className="flex-1">
+              <p id="cookies-titulo" className="text-[15px] font-semibold text-paper">
+                Podemos usar cookies?
+              </p>
+              <p className="mt-0.5 text-[13px] leading-snug text-mist">
+                Eles mostram quais anúncios trazem as pessoas até aqui (Meta), para este conteúdo chegar a quem ele
+                pode ajudar. Dá para mudar de ideia depois, no rodapé da página de resultado.
+              </p>
+            </div>
+            <div className="grid shrink-0 grid-cols-2 gap-2 sm:w-64">
               <button
                 type="button"
                 onClick={() => decide("declined")}
-                className="focus-ring h-9 rounded-full border border-white/15 px-4 text-[13px] text-mist transition active:scale-95 hover:border-white/30 hover:text-paper"
+                className="focus-ring h-11 rounded-full border border-white/20 px-4 text-sm font-medium text-paper transition active:scale-95 hover:border-white/40"
               >
                 Recusar
               </button>
               <button
                 type="button"
                 onClick={() => decide("accepted")}
-                className="focus-ring h-9 rounded-full bg-gold-fade px-4 text-[13px] font-semibold text-ink transition active:scale-95 hover:opacity-90"
+                className="focus-ring h-11 rounded-full bg-gold-fade px-4 text-sm font-semibold text-ink transition active:scale-95 hover:opacity-90"
               >
                 Aceitar
               </button>

@@ -13,6 +13,15 @@ export function getConsent(): ConsentState {
   }
 }
 
+export function clearConsent(): void {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.removeItem(CONSENT_KEY);
+  } catch {
+    // ignore
+  }
+}
+
 export function setConsent(state: "accepted" | "declined"): void {
   if (typeof window === "undefined") return;
   try {

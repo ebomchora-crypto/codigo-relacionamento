@@ -1,5 +1,6 @@
 import Container from "@/components/ui/Container";
 import { PRODUCT_NAME } from "@/data/product";
+import CookiePreferences from "@/components/analytics/CookiePreferences";
 
 export default function SiteFooter() {
   return (
@@ -14,6 +15,7 @@ export default function SiteFooter() {
         <p className="text-xs text-mist/50">
           © {new Date().getFullYear()} {PRODUCT_NAME}. Todos os direitos reservados.
         </p>
+        <CookiePreferences />
       </Container>
     </footer>
   );
