@@ -1,4 +1,4 @@
-import { fbqTrack } from "@/lib/analytics/pixel";
+import { fbqTrack, fbqTrackCustom } from "@/lib/analytics/pixel";
 import { trackInternal, getOrCreateSessionId } from "@/lib/analytics/track";
 import { getConsent } from "@/lib/analytics/consent";
 
@@ -31,7 +31,7 @@ export function trackViewContent(): void {
 
 export function trackQuizStart(): void {
   if (pixelAllowed()) {
-    fbqTrack("QuizStart" as never);
+    fbqTrackCustom("QuizStart");
   }
   trackInternal("quiz_start");
 }
@@ -42,13 +42,13 @@ export function trackQuizQuestionReached(questionId: number): void {
 
 export function trackQuizAnswer(questionId: number): void {
   if (pixelAllowed()) {
-    fbqTrack("QuizAnswer" as never, { question_id: questionId });
+    fbqTrackCustom("QuizAnswer", { question_id: questionId });
   }
 }
 
 export function trackQuizComplete(): void {
   if (pixelAllowed()) {
-    fbqTrack("QuizComplete" as never);
+    fbqTrackCustom("QuizComplete");
   }
   trackInternal("quiz_complete");
 }

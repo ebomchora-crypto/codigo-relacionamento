@@ -4,7 +4,7 @@ Quiz funnel completo em Next.js (App Router) + TypeScript + Tailwind CSS +
 Framer Motion para o e-book **O Código do Silêncio: Como Reativar o
 Interesse Sem Parecer Carente**.
 
-Fluxo: página de venda direta (botão de compra na primeira tela) com o quiz de 5 perguntas embutido no meio da página; o resultado aparece no próprio quiz, com o botão de compra →
+Fluxo: quiz de tela cheia (pergunta 1 já com o gancho) → 5 perguntas, com 3s de "pensando" entre elas → cálculo de 6s → resultado animado + oferta personalizada → checkout da Kiwify.
 resultado personalizado → apresentação do produto → módulos → prévia de
 conteúdo → oferta (Kiwify) → FAQ.
 

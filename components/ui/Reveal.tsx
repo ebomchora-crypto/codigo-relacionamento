@@ -3,13 +3,15 @@
 import { useEffect, useRef, type CSSProperties } from "react";
 
 /**
- * Reveal leve: um único IntersectionObserver compartilhado e animação só de
- * opacity/transform via CSS (sem JS por frame), para não travar em celulares
- * mais simples.
+ * Reveal à prova de falha: o conteúdo SEMPRE nasce visível (SSR, sem JS ou
+ * IntersectionObserver quebrado = nada some). Só depois de montar, os itens
+ * que estão abaixo da tela são escondidos e revelados quando entram. Se o
+ * navegador não suportar IntersectionObserver, nada é escondido.
  */
 let observer: IntersectionObserver | null = null;
 
-function getObserver(): IntersectionObserver {
+function getObserver(): IntersectionObserver | null {
+  if (typeof IntersectionObserver === "undefined") return null;
   if (!observer) {
     observer = new IntersectionObserver(
       (entries) => {
@@ -20,7 +22,7 @@ function getObserver(): IntersectionObserver {
           }
         }
       },
-      { rootMargin: "0px 0px -8% 0px" },
+      { rootMargin: "0px 0px -6% 0px" },
     );
   }
   return observer;
@@ -43,16 +45,28 @@ export default function Reveal({
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
     const io = getObserver();
+    if (!el || !io) return;
+    const rect = el.getBoundingClientRect();
+    // Já está na tela: não esconde, não pisca.
+    if (rect.top < window.innerHeight && rect.bottom > 0) return;
+    el.classList.add("rv");
     io.observe(el);
-    return () => io.unobserve(el);
+    // Rede de segurança: nunca deixa algo escondido por mais de 4s depois de aparecer.
+    const t = window.setTimeout(() => {
+      const r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight) el.classList.add("in");
+    }, 4000);
+    return () => {
+      window.clearTimeout(t);
+      io.unobserve(el);
+    };
   }, []);
 
   const Comp = as as "div";
   const style = { "--rv-y": `${y}px`, "--rv-d": `${delay}s` } as CSSProperties;
   return (
-    <Comp ref={ref as React.RefObject<HTMLDivElement>} className={`rv${className ? ` ${className}` : ""}`} style={style}>
+    <Comp ref={ref as React.RefObject<HTMLDivElement>} className={className} style={style}>
       {children}
     </Comp>
   );

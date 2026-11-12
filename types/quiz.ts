@@ -41,6 +41,8 @@ export interface ResultProfile {
   name: string;
   /** Uma frase que resume o padrão. */
   line: string;
+  /** Uma mensagem de exemplo do guia, mostrada na prévia. */
+  example: string;
   /** O que continua acontecendo se nada mudar (3 itens curtos). */
   costs: [string, string, string];
   /** Três ações curtas. */

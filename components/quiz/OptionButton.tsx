@@ -36,7 +36,7 @@ export default function OptionButton({
         dimmed && "opacity-40",
       )}
     >
-      <span aria-hidden className="w-8 shrink-0 text-center text-[1.6rem] leading-none">
+      <span aria-hidden className={cn("w-8 shrink-0 text-center text-[1.6rem] leading-none", selected && "animate-pop")}>
         {emoji}
       </span>
       <span className="flex-1 text-[1.02rem] font-medium leading-snug text-paper">{label}</span>
